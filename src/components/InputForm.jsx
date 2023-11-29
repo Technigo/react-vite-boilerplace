@@ -2,15 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { income } from "../reducers/income";
 import { expense } from "../reducers/expense";
-import {
-  InputContainer,
-  Input,
-  LabelInput,
-  ButtonCancel,
-  ButtonSave,
-  Select,
-  ButtonDelete,
-} from "../styles/InputFormStyle";
+import { InputContainer, Input, LabelInput, ButtonCancel,ButtonSave, Select, ButtonDelete,} from "../styles/InputFormStyle";
 
 const InputForm = ({ onSave, onCancel, initialData }) => {
   const dispatch = useDispatch();
@@ -19,6 +11,16 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
   const [amount, setAmount] = useState("");
   const [note, setNote] = useState("");
   const [isExpenseCategory, setIsExpenseCategory] = useState(true);
+
+  const MAX_NOTE_LENGTH = 40;
+
+  const handleNoteChange = (value) => {
+    if (value.length > MAX_NOTE_LENGTH) {
+      alert("Your note is too long 😞, the maximum length is 40 characters.");
+      return;
+    }
+    setNote(value);
+  }; 
 
   // Use useEffect to set initial values when in edit mode
   useEffect(() => {
@@ -31,7 +33,6 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
   }, [initialData]);
 
   const handleSave = () => {
-    const truncatedNote = note.substring(0, MAX_NOTE_LENGTH);
     if (!amount || parseFloat(amount) < 0) {
       alert(
         "Oops! It looks like you forgot to enter an amount or invalid amount."
@@ -49,7 +50,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
       id: initialData ? initialData.id : undefined, 
       category,
       amount: parseFloat(amount),
-      note: truncatedNote,
+      note,
     };
 
     if (initialData) {
@@ -156,9 +157,14 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
             type="text"
             placeholder="Optional"
             value={note}
-            onChange={(e) => setNote(e.target.value)}
+            onChange={(e) => handleNoteChange(e.target.value)}
           />
         </LabelInput>
+        {note.length > MAX_NOTE_LENGTH && (
+          <div style={{ color: "red" }}>
+            Note cannot exceed 50 characters.
+          </div>
+        )}
       </div>
 
       <div

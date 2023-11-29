@@ -8,12 +8,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  --primary: #214ff1;
+  --primary: #1762df;
   --secondary: #ff4f49;
   --text-color: #383a42;
   --white: #ffffff;
   --background-light:#f8f8f8;
   --button-bg: rgba(33, 79, 241, 0.10);
+  background: var(--white);
 
 
 }
@@ -41,13 +42,17 @@ p{
   font-weight: normal;
 }
 .home-container{
-  width: 100%;
-  background: var(--background-light);
+  margin: auto;
+  width: 50%;
+  background:rgba(33, 79, 241, 0.05);
+  padding: 20px 100px;
+  height: 100vh;
 }
 .balance-container{
   background: white;
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 20px 20px;
+ 
 
 }
 .balance-top-haft{
@@ -59,3 +64,19 @@ p{
   padding-top: 20px;
   text-align: center;
 }
+/* Tablet */
+@media screen and (max-width: 768px) {
+  .home-container {
+    width: 80%;
+    padding: 20px 20px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 360px) {
+  .home-container {
+    width: 100%;
+    padding: 20px 20px;
+  }
+}
+

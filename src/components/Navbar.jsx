@@ -6,8 +6,10 @@ import "../styles/Navbar.css";
 const Navbar = () => {
   return (
     <nav className="nav-container">
-      <NavLink to="/">Expensetrack</NavLink>
+      <div className="nav">
+      <NavLink to="/">Expenso</NavLink>
       <NavLink to="about">About</NavLink>
+      </div>
     </nav>
   );
 };

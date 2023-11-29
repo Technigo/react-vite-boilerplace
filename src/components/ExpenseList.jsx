@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ExpenseCard from './ExpenseCard';
 import InputForm from "./InputForm";
 import {expense} from '../reducers/expense';
-import {ListContainer, H3} from '../styles/ListStyle';
+import {ListContainer, H3Expense} from '../styles/ListStyle';
 
 const ExpenseList = () => {
   const dispatch = useDispatch()
@@ -18,7 +18,7 @@ const ExpenseList = () => {
   };
   return (
     <div>
-      <H3>Expenses</H3>
+      <H3Expense>Expenses</H3Expense>
     <ListContainer>
     <div>{allExpense.map((item)=> (
       <ExpenseCard expense={item} key={item.id} onEdit={handleEdit}/>

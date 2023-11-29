@@ -5,7 +5,7 @@ import InputForm from "./InputForm";
 import { income } from '../reducers/income';
 
 
-import { ListContainer, H3 } from "../styles/ListStyle";
+import { ListContainer, H3Income } from "../styles/ListStyle";
 
 const IncomeList = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const IncomeList = () => {
 
   return (
     <div>
-      <H3>Incomes</H3>
+      <H3Income>Incomes</H3Income>
       <ListContainer>
         <div>
           {allIncome.map((item) => (
