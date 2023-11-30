@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { income } from "../reducers/income";
 import { expense } from "../reducers/expense";
-import { InputContainer, Input, LabelInput, ButtonCancel,ButtonSave, Select, ButtonDelete,} from "../styles/InputFormStyle";
+import {
+  InputContainer,
+  Input,
+  LabelInput,
+  ButtonCancel,
+  ButtonSave,
+  Select,
+  ButtonDelete,
+} from "../styles/InputFormStyle";
 
 const InputForm = ({ onSave, onCancel, initialData }) => {
   const dispatch = useDispatch();
@@ -20,7 +28,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
       return;
     }
     setNote(value);
-  }; 
+  };
 
   // Use useEffect to set initial values when in edit mode
   useEffect(() => {
@@ -29,25 +37,23 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
       setCategory(initialData.category);
       setAmount(initialData.amount.toString());
       setNote(initialData.note);
+    } else {
+      // If there is no initialData, set default values or leave them empty
+      setType("");
+      setCategory("");
+      setAmount("");
+      setNote("");
     }
   }, [initialData]);
 
   const handleSave = () => {
-    if (!amount || parseFloat(amount) < 0) {
-      alert(
-        "Oops! It looks like you forgot to enter an amount or invalid amount."
-      );
-      return;
-    } else if (!type) {
-      alert("OOps! It looks like you forgot to select a transaction type.");
-      return;
-    } else if (!category) {
-      alert("OOps! It looks like you forgot to select a category.");
+    if (!amount || parseFloat(amount) <= 0 || !type || !category) {
+      alert("Oops! Please make sure to enter a valid amount, select a transaction type, and choose a category.");
       return;
     }
 
     const transaction = {
-      id: initialData ? initialData.id : undefined, 
+      id: initialData ? initialData.id : undefined,
       category,
       amount: parseFloat(amount),
       note,
@@ -80,7 +86,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
   const handleTypeChange = (selectedType) => {
     setType(selectedType);
     setIsExpenseCategory(selectedType === "expense");
-    setCategory(""); // Reset category when type changes
+    setCategory(""); 
   };
 
   const handleDelete = () => {
@@ -98,10 +104,13 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
         <LabelInput>
           Type
           <Select
-            value={type}
+            value={initialData ? initialData.type : type}
             onChange={(e) => handleTypeChange(e.target.value)}
           >
-            <option value="">Select type</option>
+            
+            <option value="" disabled>
+              Select type
+            </option>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </Select>
@@ -111,9 +120,14 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
         <LabelInput>
           Category
           <Select
-            value={category}
+            value={initialData ? initialData.category : category}
             onChange={(e) => setCategory(e.target.value)}
           >
+            {initialData && (
+              <option value={initialData.category} disabled>
+                {initialData.category}
+              </option>
+            )}
             {isExpenseCategory ? (
               <>
                 <option value="">Select category</option>
@@ -161,9 +175,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
           />
         </LabelInput>
         {note.length > MAX_NOTE_LENGTH && (
-          <div style={{ color: "red" }}>
-            Note cannot exceed 50 characters.
-          </div>
+          <div style={{ color: "red" }}>Note cannot exceed 50 characters.</div>
         )}
       </div>
 

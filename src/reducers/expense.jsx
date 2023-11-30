@@ -4,15 +4,16 @@ export const expense = createSlice({
     name: "expense",
     initialState: {
       expenseData: [
-        { id: 1, category: "Food", amount: 499, note:'' },
-        { id: 2, category: "Health", amount: 449, note:'gymcard' },
+        { id: 1, type:"expense", category: "Food", amount: 499, note:'' },
+        { id: 2,type:"expense", category: "Health", amount: 449, note:'gymcard' },
       ],
     },
     reducers: {
         addExpense: (state, action) => {
-          const { category, amount, note } = action.payload;
+          const { type, category, amount, note } = action.payload;
           const newExpense = {
             id: uuidv4(),
+            type: type,
             category: category,
             amount: amount,
             note: note,
@@ -20,10 +21,9 @@ export const expense = createSlice({
           state.expenseData = [newExpense, ...state.expenseData];
         }, 
         editExpense: (state, action) =>{
-          const { id, category, amount, note } = action.payload;
-            // Use map to create a new array with the updated income item
+          const { id, type, category, amount, note } = action.payload;
             state.expenseData = state.expenseData.map((item) =>
-              item.id === id ? { ...item, category, amount, note } : item
+              item.id === id ? { ...item, type, category, amount, note } : item
             );
         },
         deleteExpense: (state, action) =>{
