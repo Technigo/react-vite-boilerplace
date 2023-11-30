@@ -85,7 +85,6 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
 
   const handleTypeChange = (selectedType) => {
     setType(selectedType);
-    setIsExpenseCategory(selectedType === "expense");
     setCategory(""); 
   };
 
@@ -104,11 +103,11 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
         <LabelInput>
           Type
           <Select
-            value={initialData ? initialData.type : type}
-            onChange={(e) => handleTypeChange(e.target.value)}
+           value={initialData ? initialData.type : type}
+           onChange={(e) => handleTypeChange(e.target.value)}
+           disabled={initialData && (initialData.type === "income" || initialData.type === "expense")}
           >
-            
-            <option value="" disabled>
+            <option value="">
               Select type
             </option>
             <option value="income">Income</option>
@@ -124,11 +123,11 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
             onChange={(e) => setCategory(e.target.value)}
           >
             {initialData && (
-              <option value={initialData.category} disabled>
+              <option value={initialData.category}>
                 {initialData.category}
               </option>
             )}
-            {isExpenseCategory ? (
+            {type ==="expense" ? (
               <>
                 <option value="">Select category</option>
                 <option value="Food">Food</option>
@@ -140,7 +139,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
                 <option value="Education">Education</option>
                 <option value="Other">Other</option>
               </>
-            ) : (
+            ) : type === "income" ?(
               <>
                 <option value="">Select category</option>
                 <option value="Salary">Salary</option>
@@ -148,7 +147,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
                 <option value="Allowance">Allowance</option>
                 <option value="Other">Other</option>
               </>
-            )}
+            ): null}
           </Select>
         </LabelInput>
       </div>
