@@ -147,7 +147,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
                 <option value="Allowance">Allowance</option>
                 <option value="Other">Other</option>
               </>
-            ): null}
+            ): <option value=""> Select category</option>}
           </Select>
         </LabelInput>
       </div>
