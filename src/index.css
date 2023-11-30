@@ -15,8 +15,6 @@
   --background-light:#f8f8f8;
   --button-bg: rgba(33, 79, 241, 0.10);
   background: var(--white);
-
-
 }
 
 body {
@@ -64,9 +62,20 @@ p{
   padding-top: 20px;
   text-align: center;
 }
+.about{
+  margin: auto;
+  width: 50%;
+  padding: 20px 20px;
+  background:rgba(33, 79, 241, 0.05);
+
+}
 /* Tablet */
 @media screen and (max-width: 768px) {
   .home-container {
+    width: 80%;
+    padding: 20px 20px;
+  }
+  .about{
     width: 80%;
     padding: 20px 20px;
   }
@@ -75,6 +84,10 @@ p{
 /* Mobile */
 @media screen and (max-width: 360px) {
   .home-container {
+    width: 100%;
+    padding: 20px 20px;
+  }
+  .about{
     width: 100%;
     padding: 20px 20px;
   }
