@@ -6,8 +6,8 @@ export const expense = createSlice({
     name: "expense",
     initialState: {
       expenseData: [
-        { id: 1, type:"expense", category: "Food", amount: 499, note:'' , createdAt: new Date()},
-        { id: 2,type:"expense", category: "Health", amount: 449, note:'gymcard' , createdAt: new Date()},
+        { id: 1, type:"expense", category: "Food", amount: 499, note:'' , createdAt: moment()},
+        { id: 2,type:"expense", category: "Health", amount: 449, note:'gymcard' , createdAt: moment()},
       ],
     },
     reducers: {

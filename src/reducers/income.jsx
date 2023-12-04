@@ -6,8 +6,8 @@ export const income = createSlice({
     name: "income",
     initialState: {
       incomeData: [
-        { id: 1,type: "income", category: "Salary", amount: 25000, note:'', createdAt: new Date() },
-        { id: 2,type: "income", category: "Bonus", amount: 2000, note:'', createdAt: new Date() },
+        { id: 1,type: "income", category: "Salary", amount: 25000, note:'', createdAt: moment() },
+        { id: 2,type: "income", category: "Bonus", amount: 2000, note:'', createdAt: moment() },
       ],
     },
     reducers: {
