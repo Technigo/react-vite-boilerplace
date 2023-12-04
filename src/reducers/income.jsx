@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
 
 export const income = createSlice({
     name: "income",
     initialState: {
       incomeData: [
-        { id: 1,type: "income", category: "Salary", amount: 25000, note:'' },
-        { id: 2,type: "income", category: "Bonus", amount: 2000, note:'' },
+        { id: 1,type: "income", category: "Salary", amount: 25000, note:'', createdAt: new Date() },
+        { id: 2,type: "income", category: "Bonus", amount: 2000, note:'', createdAt: new Date() },
       ],
     },
     reducers: {
@@ -18,6 +19,7 @@ export const income = createSlice({
             category: category,
             amount: amount,
             note: note,
+            createdAt: new Date(),
           };
           state.incomeData = [newIncome, ...state.incomeData];
         },

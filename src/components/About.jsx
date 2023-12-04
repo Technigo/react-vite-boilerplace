@@ -12,14 +12,14 @@ const About = () => {
       <Question>What is this project about?</Question>
       <p>
         This is the final project of Technigo's React and JavaScript 11-week
-        fall '23, created by me. I wanted to develop a daily expense tracker web
+        fall '23. I wanted to develop a daily expense tracker web
         application that combines many aspects I learned during the course.
       </p>
       <Question>How does the app work?</Question>
       <p>
         {" "}
         At the home page users can add a new transaction. For each transaction
-        users can provide the following details:{" "}
+        users can log the following details:{" "}
       </p>
       <div style={{ paddingLeft: "20px" }}>
         <p>

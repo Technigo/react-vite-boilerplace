@@ -2,10 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import AddTransaction from "./AddTransaction";
-import moment from 'moment';
 
-import { IncomeStyle, ExpenseStyle, BalanceStyle, Date } from "../styles/BalanceStyle";
-const date = moment().format('dddd, ll');
+import { IncomeStyle, ExpenseStyle, BalanceStyle } from "../styles/BalanceStyle";
 
 const Balance = () => {
   const incomeData = useSelector((store) => store.income.incomeData);
@@ -20,7 +18,6 @@ const Balance = () => {
 
   return (
     <>
-    <Date>{date}</Date>
     <div className="balance-container">
       
     <div className="balance-top-haft">

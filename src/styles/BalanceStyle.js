@@ -15,7 +15,3 @@ export const BalanceStyle = styled.p`
   margin-top: 4px;
   margin-bottom: 4px;
 `;
-export const Date = styled.p`
-font-size: 14px;
-text-align: center;
-`

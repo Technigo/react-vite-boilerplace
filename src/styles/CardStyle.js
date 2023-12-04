@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const CardContainer = styled.div`
 display: flex;
-justify-content: space-between;
 padding: 6px 20px;
 align-items: center;
 `
@@ -15,4 +14,5 @@ margin:0;
 `
 export const Content = styled.p`
 margin:0;
+width: 30%;
 `
