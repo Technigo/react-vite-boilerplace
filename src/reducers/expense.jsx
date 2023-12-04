@@ -19,7 +19,7 @@ export const expense = createSlice({
             category: category,
             amount: amount,
             note: note,
-            createdAt: new Date(),
+            createdAt: moment(),
           };
           state.expenseData = [newExpense, ...state.expenseData];
         }, 
