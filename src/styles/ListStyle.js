@@ -17,7 +17,7 @@ color: var(--secondary);
 `
 export const TextMessage = styled.div`
 color:var(--textColor);
-font-size: 16px;
-padding-right: 12px;
-margin-right: 12px;
+font-size: 14px;
+margin-left: 10px;
+
 `

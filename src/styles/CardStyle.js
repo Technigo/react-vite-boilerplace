@@ -14,5 +14,16 @@ margin:0;
 `
 export const Content = styled.p`
 margin:0;
-width: 30%;
+width: 40%;
+text-align:right;
+`
+export const CreateDate = styled.p`
+margin:0;
+width:10%;
+`
+export const EditIcon = styled.div`
+width: 10%;
+margin:0;
+text-align:right;
+
 `

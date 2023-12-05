@@ -1,38 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { income } from "../reducers/income";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { expense } from "../reducers/expense";
+import { useNavigate } from 'react-router-dom';
+
 import {
   InputContainer,
   Input,
   LabelInput,
   ButtonCancel,
   ButtonSave,
+  ButtonDelete,
   Select,
+  Title,
 } from "../styles/InputFormStyle";
 
-const InputForm = ({ onSave, onCancel, initialData }) => {
-  const dispatch = useDispatch();
-  const [type, setType] = useState("");
-  const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState("");
-  const [note, setNote] = useState("");
+// Component shows edit page for expenses
+const EditExpensePage = ({ onSave, onCancel }) => {
+    const {id} = useParams();
+    const dispatch = useDispatch();
+    const data = useSelector((store) => store.expense.expenseData);
+    const selectedExpense = data.find((item) => item.id === id);
+    console.log(selectedExpense);
+  
+    const [type, setType] = useState(selectedExpense ? selectedExpense.type : "");
+    const [category, setCategory] = useState(selectedExpense ? selectedExpense.category : "");
+    const [amount, setAmount] = useState(selectedExpense ? String(selectedExpense.amount) : "");
+    const [note, setNote] = useState(selectedExpense ? selectedExpense.note : "");
 
-  const MAX_NOTE_LENGTH = 40;
+    const navigateTo = useNavigate();
 
   useEffect(() => {
-    if (initialData) {
-      setType(initialData.type);
-      setCategory(initialData.category);
-      setAmount(initialData.amount.toString());
-      setNote(initialData.note);
-    } else {
-      setType("");
-      setCategory("");
-      setAmount("");
-      setNote("");
+    if (selectedExpense) {
+      setType(selectedExpense.type);
+      setCategory(selectedExpense.category);
+      setAmount(selectedExpense.amount.toString());
+      setNote(selectedExpense.note);
     }
-  }, [initialData]);
+  }, [selectedExpense]);
+  console.log(selectedExpense);
+  const MAX_NOTE_LENGTH = 40;
 
   const handleNoteChange = (value) => {
     if (value.length > MAX_NOTE_LENGTH) {
@@ -43,50 +50,45 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
   };
 
   const handleSave = () => {
-    if (!amount || parseFloat(amount) <= 0 || !type || !category) {
-      alert("Oops! Please make sure to enter a valid amount, select a transaction type, and choose a category.");
+    if (!amount || parseFloat(amount) <= 0 || !category) {
+      alert("Oops! Please make sure to enter a valid amount, select a category.");
       return;
     }
 
-    const transaction = {
+    const editedExpense = {
+      id: selectedExpense.id,
+      type,
       category,
       amount: parseFloat(amount),
       note,
     };
 
-    if (type === "income") {
-      dispatch(income.actions.addIncome(transaction));
-    } else if (type === "expense") {
-      dispatch(expense.actions.addExpense(transaction));
-    }
-
-    // Clear the form
-    setType("");
-    setCategory("");
-    setAmount("");
-    setNote("");
-
-    // Call the onSave callback
-    onSave(transaction);
+    dispatch(expense.actions.editExpense(editedExpense));
+    navigateTo('/');
+    
   };
 
-  const handleTypeChange = (selectedType) => {
-    setType(selectedType);
-    setCategory("");
+  const handleDelete = () => {
+    dispatch(expense.actions.deleteExpense(selectedExpense.id));
+    navigateTo('/');
   };
+  const handleCancel = () =>{
+    navigateTo('/');
+    
+  }
 
   return (
+    <section className="edit-container">
+    <Title>Edit Expense</Title>
     <InputContainer>
       <div>
         <LabelInput>
           Type
           <Select
             value={type}
-            onChange={(e) => handleTypeChange(e.target.value)}
+            onChange={(e)=> setType(e.target.value)}
           >
-            <option value="">Select type</option>
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
+            <option value="income">Expense</option>
           </Select>
         </LabelInput>
       </div>
@@ -97,8 +99,6 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            {type === "expense" ? (
-              <>
                 <option value="">Select category</option>
                 <option value="Food">Food</option>
                 <option value="Social Life">Social Life</option>
@@ -108,18 +108,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
                 <option value="Beauty">Beauty</option>
                 <option value="Education">Education</option>
                 <option value="Other">Other</option>
-              </>
-            ) : type === "income" ? (
-              <>
-                <option value="">Select category</option>
-                <option value="Salary">Salary</option>
-                <option value="Bonus">Bonus</option>
-                <option value="Allowance">Allowance</option>
-                <option value="Other">Other</option>
-              </>
-            ) : (
-              <option value="">Select category</option>
-            )}
+            
           </Select>
         </LabelInput>
       </div>
@@ -160,14 +149,16 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
         }}
       >
         <div>
-          <ButtonCancel onClick={onCancel}>Cancel</ButtonCancel>
+            <ButtonDelete onClick={handleDelete}>Delete</ButtonDelete>
         </div>
         <div>
+          <ButtonCancel onClick={handleCancel}>Cancel</ButtonCancel>
           <ButtonSave onClick={handleSave}>Save</ButtonSave>
         </div>
       </div>
     </InputContainer>
+    </section>
   );
 };
 
-export default InputForm;
+export default EditExpensePage;

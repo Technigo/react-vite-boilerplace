@@ -6,8 +6,6 @@ export const income = createSlice({
     name: "income",
     initialState: {
       incomeData: [
-        { id: 1,type: "income", category: "Salary", amount: 25000, note:'', createdAt: moment() },
-        { id: 2,type: "income", category: "Bonus", amount: 2000, note:'', createdAt: moment() },
       ],
     },
     reducers: {
@@ -19,7 +17,7 @@ export const income = createSlice({
             category: category,
             amount: amount,
             note: note,
-            createdAt: moment(),
+            createdAt: moment().format("MMM DD"),
           };
           state.incomeData = [newIncome, ...state.incomeData];
         },
@@ -27,7 +25,7 @@ export const income = createSlice({
         editIncome: (state, action) => {
             const { id, type, category, amount, note } = action.payload;
             state.incomeData = state.incomeData.map((item) =>
-              item.id === id ? { ...item, type, category, amount, note } : item
+              item.id === id ? { ...item, type, category, amount, note, createdAt: moment().format("MMM DD") } : item
             );
           },
           deleteIncome: (state, action) =>{

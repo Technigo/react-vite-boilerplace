@@ -16,7 +16,7 @@ const Home = () => {
       <SearchContainer>
         <SearchInput
           type="text"
-          placeholder="Search by transaction category..."
+          placeholder="Search transaction category..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />

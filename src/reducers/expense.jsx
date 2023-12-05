@@ -2,12 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 
+const createdAt = moment().format("MMM DD");
 export const expense = createSlice({
     name: "expense",
     initialState: {
       expenseData: [
-        { id: 1, type:"expense", category: "Food", amount: 499, note:'' , createdAt: moment()},
-        { id: 2,type:"expense", category: "Health", amount: 449, note:'gymcard' , createdAt: moment()},
       ],
     },
     reducers: {
@@ -19,12 +18,12 @@ export const expense = createSlice({
             category: category,
             amount: amount,
             note: note,
-            createdAt: moment(),
+            createdAt:  moment().format("MMM DD"),
           };
           state.expenseData = [newExpense, ...state.expenseData];
         }, 
         editExpense: (state, action) =>{
-          const { id, type, category, amount, note } = action.payload;
+          const { id, type, category, amount, note} = action.payload;
             state.expenseData = state.expenseData.map((item) =>
               item.id === id ? { ...item, type, category, amount, note } : item
             );

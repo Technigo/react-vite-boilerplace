@@ -3,12 +3,13 @@ import { Provider } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { income } from "./reducers/income";
 import { expense } from "./reducers/expense";
-
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
-import LoadingPage from "./components/LoadingPage"; // Import your LoadingPage component
+import LoadingPage from "./components/LoadingPage"; 
+import EditIncomePage from "./components/EditIncomePage";
+import EditExpensePage from "./components/EditExpensePage";
 
 const reducer = combineReducers({
   income: income.reducer,
@@ -21,12 +22,10 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading for 3 seconds
+    // Simulate loading for 2 seconds
     const loadingTimeout = setTimeout(() => {
       setLoading(false);
     }, 2000);
-
-    // Clean up the timeout when the component unmounts
     return () => clearTimeout(loadingTimeout);
   }, []);
 
@@ -34,13 +33,15 @@ function App() {
     <BrowserRouter>
       <Provider store={store}>
         {loading ? (
-          <LoadingPage /> // Show the loading animation
+          <LoadingPage /> 
         ) : (
           <>
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/editincome/:id" element={<EditIncomePage />} />
+              <Route path="/editexpense/:id" element={<EditExpensePage />} />
             </Routes>
           </>
         )}

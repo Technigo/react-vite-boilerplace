@@ -59,3 +59,7 @@ export const ButtonDelete = styled.button`
   width: 80px;
   margin-right: 6px;
 `;
+export const Title = styled.h2`
+color: var(--primary);
+text-align: center;
+`

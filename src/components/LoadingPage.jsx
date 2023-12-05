@@ -13,7 +13,6 @@ margin: 0;
 padding: 0;`
 
 export const H1 = styled.h1` 
-  font-size: 32px; 
   color:var(--primary);
   margin-bottom:0;
 

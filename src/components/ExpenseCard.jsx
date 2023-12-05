@@ -1,28 +1,18 @@
 import React from "react";
-import { CardContainer, Note, Content } from "../styles/CardStyle";
+import { CardContainer, Note, Content, CreateDate, EditIcon } from "../styles/CardStyle";
+import { Link } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
-import moment from "moment";
 
 //Component shows an expense log
-const Expense = ({ expense, onEdit }) => {
-  const formattedCreatedAt = moment(expense.createdAt).format("MMM DD");
-
+const Expense = ({ expense }) => {
   return (
     <>
       <CardContainer>
-        <Content>{formattedCreatedAt}</Content>
+        <CreateDate>{expense.createdAt}</CreateDate>
         <Content>{expense.category}</Content>
         <Content>{expense.amount}</Content>
-        <FaRegEdit
-          style={{
-            color: "var(--primary)",
-            alignItems: "center",
-            width: "10%",
-          }}
-          onClick={() => onEdit(expense)}
-        >
-          Edit
-        </FaRegEdit>
+        <EditIcon>
+        <Link to={`/editexpense/${expense.id}`} style={{ color: 'var(--primary)' }}><FaRegEdit/></Link></EditIcon>
       </CardContainer>
       <Note>{expense.note}</Note>
     </>
