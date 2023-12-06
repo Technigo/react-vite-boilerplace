@@ -82,11 +82,12 @@ const EditIncomePage = ({ onSave, onCancel }) => {
   return (
     <section className="edit-container">
     <Title>Edit Income</Title>
-    <InputContainer>
+    <InputContainer className="edit-form">
       <div>
         <LabelInput>
           Type
           <Select
+            className="input-box"
             value={type}
             onChange={(e)=> setType(e.target.value)}
           >
@@ -98,6 +99,7 @@ const EditIncomePage = ({ onSave, onCancel }) => {
         <LabelInput>
           Category
           <Select
+            className="input-box"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -114,6 +116,7 @@ const EditIncomePage = ({ onSave, onCancel }) => {
         <LabelInput>
           Amount
           <Input
+            className="input-box"
             type="number"
             name="amount"
             placeholder=""
@@ -127,6 +130,7 @@ const EditIncomePage = ({ onSave, onCancel }) => {
           {" "}
           Note
           <Input
+            className="input-box"
             type="text"
             name="note"
             placeholder="Optional"

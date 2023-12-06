@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const InputContainer = styled.div`
-background: var(--button-bg);
+background: var(--primary-light-bg);
 text-align:left;
 padding: 20px 10px;
 border-radius: 4px;

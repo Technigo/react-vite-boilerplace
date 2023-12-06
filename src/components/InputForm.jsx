@@ -44,7 +44,9 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
 
   const handleSave = () => {
     if (!amount || parseFloat(amount) <= 0 || !type || !category) {
-      alert("Oops! Please make sure to enter a valid amount, select a transaction type, and choose a category.");
+      alert(
+        "Oops! Please make sure to enter a valid amount, select a transaction type, and choose a category."
+      );
       return;
     }
 
@@ -81,6 +83,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
         <LabelInput>
           Type
           <Select
+            className="input-box"
             value={type}
             onChange={(e) => handleTypeChange(e.target.value)}
           >
@@ -94,6 +97,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
         <LabelInput>
           Category
           <Select
+            className="input-box"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -127,6 +131,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
         <LabelInput>
           Amount
           <Input
+            className="input-box"
             type="number"
             name="amount"
             placeholder=""
@@ -140,6 +145,7 @@ const InputForm = ({ onSave, onCancel, initialData }) => {
           {" "}
           Note
           <Input
+            className="input-box"
             type="text"
             name="note"
             placeholder="Optional"

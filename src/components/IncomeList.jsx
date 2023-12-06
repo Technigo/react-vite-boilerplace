@@ -10,9 +10,9 @@ const IncomeList = ({searchInput}) => {
     item.category.toLowerCase().includes(searchInput.toLowerCase())
   );
   return (
-    <div>
+    <section>
       <H3Income>Incomes</H3Income>
-      <ListContainer>
+      <ListContainer className="list-container">
       {filteredIncome.length === 0 ? (
           <TextMessage>No data available.</TextMessage>
         ) : (
@@ -22,7 +22,7 @@ const IncomeList = ({searchInput}) => {
           ))}
         </div>)}
       </ListContainer>
-    </div>
+    </section>
   );
 };
 

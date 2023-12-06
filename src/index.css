@@ -15,16 +15,44 @@
   --white: #ffffff;
   --background-light:#f8f8f8;
   --primary-light-bg: rgba(33, 79, 241, 0.05);
-  background: var(--white);
+  --dark-background: #000000;
+  --dark-box-background: #1f1f1f;
+  --dark-container-background: #111111;
+  --dark-text-color: #ffffff;
+  --dark-primary: #4a90e2;
 }
 
 body {
   margin: 0;
   padding: 0;
   color: var(--text-color);
+  background: var(--white);
   width: 100%;
+  transition: background 0.3s ease;
 
 }
+body.dark-mode {
+  background: var(--dark-background);
+  color: var(--dark-text-color);
+}
+body.dark-mode .balance-container,
+body.dark-mode .nav-container,
+body.dark-mode .search-box,
+body.dark-mode .list-container,
+body.dark-mode .edit-form
+{
+  background: var(--dark-box-background); 
+}
+body.dark-mode .input-box
+{
+  background: var(--dark-box-background); 
+  color: var(--white);
+}
+body.dark-mode .home-container,
+body.dark-mode .about{
+  background: var(--dark-container-background);
+}
+
 h1{
   font-size: 32px;
   font-weight: bold;
@@ -40,6 +68,9 @@ h3{
 p{
   font-size: 16px;
   font-weight: normal;
+}
+button{
+  cursor: pointer;
 }
 .home-container{
   margin: auto;

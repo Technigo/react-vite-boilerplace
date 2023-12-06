@@ -12,9 +12,9 @@ const ExpenseList = ({ searchInput }) => {
   );
 
   return (
-    <div>
+    <section>
       <H3Expense>Expenses</H3Expense>
-      <ListContainer>
+      <ListContainer className="list-container">
         {filteredExpense.length === 0 ? (
           <TextMessage>No data available.</TextMessage>
         ) : (
@@ -25,7 +25,7 @@ const ExpenseList = ({ searchInput }) => {
           </div>
         )}
       </ListContainer>
-    </div>
+    </section>
   );
 };
 

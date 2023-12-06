@@ -80,11 +80,12 @@ const EditExpensePage = ({ onSave, onCancel }) => {
   return (
     <section className="edit-container">
     <Title>Edit Expense</Title>
-    <InputContainer>
+    <InputContainer className="edit-form">
       <div>
         <LabelInput>
           Type
           <Select
+            className="input-box"
             value={type}
             onChange={(e)=> setType(e.target.value)}
           >
@@ -96,6 +97,7 @@ const EditExpensePage = ({ onSave, onCancel }) => {
         <LabelInput>
           Category
           <Select
+            className="input-box"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -116,6 +118,7 @@ const EditExpensePage = ({ onSave, onCancel }) => {
         <LabelInput>
           Amount
           <Input
+            className="input-box"
             type="number"
             name="amount"
             placeholder=""
@@ -129,6 +132,7 @@ const EditExpensePage = ({ onSave, onCancel }) => {
           {" "}
           Note
           <Input
+            className="input-box"
             type="text"
             name="note"
             placeholder="Optional"
